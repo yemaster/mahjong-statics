@@ -1,5 +1,5 @@
 /**
- * Mahjong - v2.1.2
+ * Queshin - v3.0.2 Beta
  * /statics/main/main.js
  * 
  * CopyRight 2023 (c) yemaster
@@ -15,7 +15,7 @@ let mahjong = new Vue({
         // 应用信息
         app: {
             name: 'Queshin',
-            version: 'v2.1.2',
+            version: 'v3.0.2 Beta',
             author: 'yemaster',
         },
         navShow: 0,

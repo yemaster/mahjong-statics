@@ -1,5 +1,5 @@
 /**
- * Mahjong - v2.1.1
+ * Mahjong - v3.0.2
  * /statics/main/start.css
  * 
  * CopyRight 2023 (c) yemaster
@@ -136,13 +136,14 @@ body.mb {
     text-align: center;
     color: #fff;
     font-size: 18px;
-    bottom: 70px;
+    bottom: calc(10vh + 15px);
     opacity: 1;
     transition: opacity .2s;
 }
 
 #progress-info span:not(:first-child) {
-    line-height: 18px;
+    display: block;
+    margin-top: 8px;
 }
 
 #progress-box {
