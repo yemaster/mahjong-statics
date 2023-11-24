@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: "genshin";
-    src: url(/statics/main/genshin.woff2);
+    src: url(https://cdn.jsdelivr.net/gh/yemaster/mahjong-statics@3.0.0/main/genshin.woff2);
 }
 
 * {
@@ -35,7 +35,7 @@
 }
 
 .back-img.bg {
-    background-image: url(/statics/imgs/bg.jpg);
+    background-image: url(https://cdn.jsdelivr.net/gh/yemaster/mahjong-statics@3.0.0/imgs/bg.jpg);
 }
 
 .back-img.bg::after {
