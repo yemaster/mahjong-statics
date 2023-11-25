@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: "genshin";
-    src: url(https://cdn.jsdelivr.net/gh/yemaster/mahjong-statics@3.0.0/main/genshin.woff2);
+    src: url(/statics/main/genshin.woff2);
 }
 
 *:not(.icon) {
@@ -142,6 +142,7 @@ h6 {
     backdrop-filter: blur(4px);
     background-color: #ffffff90;
     max-width: 300px;
+    margin: 0 !important;
     width: 30%;
     position: fixed;
     right: 0;
@@ -267,4 +268,44 @@ h6 {
     height: calc(2vh + 40px);
     float: left;
     cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 5px #bebebe;
+    background: #bebebe;
+    transition: all 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    -webkit-box-shadow: inset 0 0 5px #aaaaaa;
+    background: #888;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px #e0e0e0;
+    background: #e0e0e0;
+    opacity: 1;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 3px 8px;
+    font-size: 10px;
+    line-height: 12px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, .2);
+    opacity: .2;
+    transition: opacity .2s cubic-bezier(0.8, 0.2, 0.9, 0.4);
+}
+
+.footer:hover {
+    opacity: 1;
 }

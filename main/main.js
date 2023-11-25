@@ -1,5 +1,5 @@
 /**
- * Queshin - v3.0.2 Beta
+ * Queshin - v3.0.3 Beta
  * /statics/main/main.js
  * 
  * CopyRight 2023 (c) yemaster
@@ -12,14 +12,16 @@ let mahjong = new Vue({
         // 获取房间号
         room: tmpRoom,
         toRoom: tmpRoom,
+        availableRoom: [],
         // 应用信息
         app: {
             name: 'Queshin',
-            version: 'v3.0.2 Beta',
+            version: 'v3.0.3 Beta',
             author: 'yemaster',
         },
-        navShow: 0,
+        navShow: 1,
         navs: [
+            { name: 'nav.hall' },
             { name: 'nav.room' },
             { name: 'nav.me' },
             { name: 'nav.settings' }
@@ -80,13 +82,21 @@ let mahjong = new Vue({
             const _t = this
             localStorage.mtab = n
             _t.$nextTick(() => {
-                if (n != o && n == 2)
-                    $('.dropdown').dropdown({
-                        onChange: function (value) {
-                            _t.$i18n.locale = value
-                            localStorage.mlang = value
-                        }
-                    })
+                if (n != o) {
+                    if (n == 3)
+                        $('.dropdown').dropdown({
+                            onChange: function (value) {
+                                _t.$i18n.locale = value
+                                localStorage.mlang = value
+                            }
+                        })
+                    else if (n == 0) {
+                        _t.sked.emit("room_list")
+                    }
+                    else if (o == 0) {
+                        _t.sked.emit("exit_hall")
+                    }
+                }
             })
         },
     },
@@ -121,6 +131,10 @@ let mahjong = new Vue({
                     ++cnt
                 }
             }
+        })
+
+        _t.sked.on("room_list", (data) => {
+            _t.availableRoom = data
         })
 
         // Get System Message, Show Toast
@@ -335,7 +349,7 @@ let mahjong = new Vue({
         },
         sendMessage(e) {
             e.preventDefault();
-            if (this.chatMessage.length <= 1) {
+            if (this.chatMessage.length <= 0) {
                 $('body')
                     .toast({
                         class: "error",
@@ -393,22 +407,9 @@ let mahjong = new Vue({
                 pos: p
             })
         },
-        quitGame() {
-            this.user.status = 0
-            this.huPeople = ""
-            this.availableOp = [false, false, false, false]
-            this.allShow = {}
-            this.game.cards = []
-            this.game.dragon = -1
-            this.game.pt = [[], [], [], []]
-            this.game.op = [[], [], [], []]
-            this.sked.emit('update_user', {
-                user: this.user,
-                room: this.room
-            })
-        },
-        enterNewRoom() {
-            const trm = Number(this.toRoom)
+        gotoRoom(rid) {
+            localStorage.mtab = 1
+            const trm = Number(rid)
             if (isNaN(trm) || trm < 0 || trm >= 10000) {
                 $('body')
                     .toast({
@@ -422,7 +423,21 @@ let mahjong = new Vue({
                 this.toRoom = tmpRoom
                 return
             }
-            location.href = `/room/${trm}`
+            location.href = `/room/${rid}`
+        },
+        quitGame() {
+            this.user.status = 0
+            this.huPeople = ""
+            this.availableOp = [false, false, false, false]
+            this.allShow = {}
+            this.game.cards = []
+            this.game.dragon = -1
+            this.game.pt = [[], [], [], []]
+            this.game.op = [[], [], [], []]
+            this.sked.emit('update_user', {
+                user: this.user,
+                room: this.room
+            })
         }
     },
     i18n

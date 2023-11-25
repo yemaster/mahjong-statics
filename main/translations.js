@@ -1,9 +1,16 @@
-// Translations
+/**
+ * Queshin - v3.0.3 Beta
+ * /statics/main/translations.js
+ * 
+ * CopyRight 2023 (c) yemaster
+ * PB23151830 
+ */
 const messages = {
     en: {
         nav: {
             logo: 'Queshin USTC',
             home: 'Homepage',
+            hall: 'Game hall',
             settings: 'Settings',
             room: 'Room',
             help: 'Help',
@@ -56,6 +63,7 @@ const messages = {
         nav: {
             logo: '中科雀',
             home: '首页',
+            hall: '游戏大厅',
             settings: '设置',
             room: '房间',
             me: '个人',
@@ -108,6 +116,7 @@ const messages = {
         nav: {
             logo: 'Queshin USTC',
             home: 'トップページ',
+            hall: 'ゲームホールです',
             settings: '設置',
             room: '部屋',
             help: '助けて',
