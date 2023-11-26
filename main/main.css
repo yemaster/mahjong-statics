@@ -1,6 +1,6 @@
 /**
  * Mahjong - v2.1.2
- * /statics/main/main.css
+ * https://cdn.jsdelivr.net/gh/yemaster/mahjong-statics@3.0.3/main/main.css
  * 
  * CopyRight 2023 (c) yemaster
  * PB23151830 
@@ -14,10 +14,6 @@
 *:not(.icon) {
     font-family: "genshin" !important;
     user-select: none;
-}
-
-body {
-    /*background-color: #f4f5f7;*/
 }
 
 #app {
@@ -88,6 +84,7 @@ ul.nav-tabs li a {
     padding: 14px 20px;
     font-size: 16px;
     text-decoration: none;
+    font-weight: 300;
 }
 
 ul.nav-tabs li::before {
@@ -293,7 +290,7 @@ h6 {
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: auto !important;
@@ -308,4 +305,8 @@ h6 {
 
 .footer:hover {
     opacity: 1;
+}
+
+label {
+    font-weight: 300 !important;
 }

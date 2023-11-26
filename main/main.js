@@ -1,5 +1,5 @@
 /**
- * Queshin - v3.0.3 Beta
+ * Queshin - v3.0.4 Beta
  * /statics/main/main.js
  * 
  * CopyRight 2023 (c) yemaster
@@ -12,6 +12,9 @@ let mahjong = new Vue({
         // 获取房间号
         room: tmpRoom,
         toRoom: tmpRoom,
+        roomInfo: {
+            roomAvailable,
+        },
         availableRoom: [],
         // 应用信息
         app: {
@@ -80,16 +83,23 @@ let mahjong = new Vue({
     watch: {
         navShow(n, o) {
             const _t = this
+
+            if (!_t.roomInfo.roomAvailable && n != 0) {
+                _t.navShow = o
+                return
+            }
+
             localStorage.mtab = n
             _t.$nextTick(() => {
                 if (n != o) {
-                    if (n == 3)
-                        $('.dropdown').dropdown({
+                    if (n == 3) {
+                        $('.langdp').dropdown({
                             onChange: function (value) {
                                 _t.$i18n.locale = value
                                 localStorage.mlang = value
                             }
                         })
+                    }
                     else if (n == 0) {
                         _t.sked.emit("room_list")
                     }
@@ -112,6 +122,38 @@ let mahjong = new Vue({
         if (localStorage.mlang != undefined)
             _t.$i18n.locale = localStorage.mlang
 
+        _t.sked.on('connect', function () {
+            _t.isloading = 0
+            _t.game = {
+                cards: [],
+                dragon: -1,
+                pt: [[], [], [], []],
+                me: -1,
+            }
+            _t.newPutCard = 0
+            _t.gangCard = []
+            _t.eatPos = []
+            _t.nowSid = ""
+            _t.canOp = false
+            _t.availableOp = [false, false, false, false]
+            if (!_t.roomInfo.roomAvailable)
+                return
+            _t.user.status = 0
+            _t.updateMe()
+        })
+        _t.sked.on("room_list", (data) => {
+            _t.availableRoom = data
+        })
+        _t.sked.on('disconnect', (data) => {
+            _t.isloading = 1
+        })
+        if (!_t.roomInfo.roomAvailable) {
+            _t.navs = [{ name: 'nav.hall' }]
+            return
+        }
+        _t.sked.on("be_kicked_off", () => {
+            location.href = "/room/hall"
+        })
         _t.sked.on('update_player_info', function (data) {
             _t.onlineUsers = data.p
             let cnt = 0
@@ -131,10 +173,6 @@ let mahjong = new Vue({
                     ++cnt
                 }
             }
-        })
-
-        _t.sked.on("room_list", (data) => {
-            _t.availableRoom = data
         })
 
         // Get System Message, Show Toast
@@ -223,24 +261,6 @@ let mahjong = new Vue({
         _t.sked.on('get_dragon', function (data) {
             _t.game.dragon = data.dragon
         })
-        _t.sked.on('connect', function () {
-            $('a[data-tab=basic]').click()
-            _t.isloading = 0
-            _t.game = {
-                cards: [],
-                dragon: -1,
-                pt: [[], [], [], []],
-                me: -1,
-            }
-            _t.newPutCard = 0
-            _t.gangCard = []
-            _t.eatPos = []
-            _t.nowSid = ""
-            _t.canOp = false
-            _t.availableOp = [false, false, false, false]
-            _t.user.status = 0
-            _t.updateMe()
-        })
         _t.sked.on('new_put_card', (data) => {
             let olu = _t.onlineUsers
             let cp = -1
@@ -295,14 +315,6 @@ let mahjong = new Vue({
         })
         _t.sked.on('must_spectator', () => {
             _t.user.spectator = true
-        })
-        _t.sked.on('disconnect', (data) => {
-            _t.isloading = 1
-        })
-        $('.peopleNum').slider({
-            min: 2,
-            max: 4,
-            smooth: true
         })
     },
     computed: {
@@ -406,6 +418,9 @@ let mahjong = new Vue({
                 type: e,
                 pos: p
             })
+        },
+        kickGuy(pid) {
+            this.sked.emit('kick_off', this.onlineUsers[pid].clientId)
         },
         gotoRoom(rid) {
             localStorage.mtab = 1

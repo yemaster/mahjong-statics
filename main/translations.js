@@ -1,5 +1,5 @@
 /**
- * Queshin - v3.0.3 Beta
+ * Queshin - v3.0.4 Beta
  * /statics/main/translations.js
  * 
  * CopyRight 2023 (c) yemaster
@@ -24,6 +24,7 @@ const messages = {
             free: 'Free',
             waiting: 'Waiting',
             ingame: 'Gaming',
+            admin: 'Admin'
         },
         game: {
             dragon: 'Dragon',
@@ -77,6 +78,7 @@ const messages = {
             free: '空闲',
             waiting: '等待开始',
             ingame: '游戏中',
+            admin: '管理员',
         },
         game: {
             dragon: '龙',
@@ -130,6 +132,7 @@ const messages = {
             free: '暇',
             waiting: '始まりを待つ',
             ingame: 'ゲームの中',
+            admin: '管理人です'
         },
         game: {
             dragon: '竜',
