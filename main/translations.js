@@ -57,7 +57,7 @@ const messages = {
             devwiki: "Dev Wiki"
         },
         content: {
-            about: "Include: System-End Program, Client-End Program, Client-End Bot Program.<br>Developed by yemaster(PB23151830).<br>Only used for assignment D of 2023 Advanced Programming class of USTC.<br>"
+            about: "Include: System-End Program, Client-End Program, Client-End Bot Program.<br>Developed by yemaster(PB23151830).<br>Used for assignment D of 2023 Advanced Programming class of USTC.<br>"
         }
     },
     cn: {
@@ -111,7 +111,7 @@ const messages = {
             devwiki: "开发者文档"
         },
         content: {
-            about: "包括:系统端程序，客户端程序，客户端Bot程序。<br>由yemaster(PB23151830)开发。<br>仅用于中国科技大学2023届程序设计进阶班课作业D"
+            about: "包括:系统端程序，客户端程序，客户端Bot程序。<br>由yemaster(PB23151830)开发。<br>用于中国科技大学2023届程序设计进阶班课作业D"
         }
     },
     jp: {

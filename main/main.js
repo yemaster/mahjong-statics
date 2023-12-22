@@ -1,5 +1,5 @@
 /**
- * Queshin - v3.0.4 Beta
+ * Queshin - v3.1.0 Beta
  * /statics/main/main.js
  * 
  * CopyRight 2023 (c) yemaster
@@ -19,7 +19,7 @@ let mahjong = new Vue({
         // 应用信息
         app: {
             name: 'Queshin',
-            version: 'v3.0.3 Beta',
+            version: 'v3.1.1',
             author: 'yemaster',
         },
         navShow: 1,
@@ -62,6 +62,8 @@ let mahjong = new Vue({
         availableOp: [false, false, false, false],
         huPeople: '',
         allShow: {},
+        allHuMods: [{ val: 1, name: "标准" }, { val: 2, name: "十三不搭" }, { val: 4, name: "七对子" }, { val: 8, name: "十三幺" }, { val: 16, name: "四龙" }],
+        chosenHuMods: [true, true, true, false, true],
         // 支持的多语言，英语日语主要来自于机翻
         langs: [{
             val: 'en',
@@ -109,6 +111,12 @@ let mahjong = new Vue({
                 }
             })
         },
+    },
+    created() {
+        window.addEventListener('beforeunload', e => this.closeConnect(e))
+    },
+    beforeDestroy() {
+        window.removeEventListener('beforeunload', e => this.closeConnect(e))
     },
     mounted() {
         let _t = this
@@ -453,6 +461,10 @@ let mahjong = new Vue({
                 user: this.user,
                 room: this.room
             })
+        },
+        closeConnect(e) {
+            let _t = this
+            _t.sked.close()
         }
     },
     i18n
